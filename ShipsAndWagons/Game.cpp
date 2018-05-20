@@ -24,6 +24,54 @@ Game::~Game()
 void Game::loadTextures()
 {
 	texmgr.loadTexture("background", "Resources/Images/background.png");
+
+	texmgr.loadTexture("grass", "Resources/Images/Tiles/grass.png");
+	texmgr.loadTexture("forest", "Resources/Images/Tiles/forest.png");
+	texmgr.loadTexture("water", "Resources/Images/Tiles/water.png");
+	texmgr.loadTexture("residential", "Resources/Images/Tiles/residential.png");
+	texmgr.loadTexture("commercial", "Resources/Images/Tiles/commercial.png");
+	texmgr.loadTexture("industrial", "Resources/Images/Tiles/industrial.png");
+	texmgr.loadTexture("road", "Resources/Images/Tiles/road.png");
+}
+
+void Game::loadTiles()
+{
+	const Animation staticAnim(0, 0, 1.0f);
+	this->tileAtlas["grass"] =
+		Tile(tileSize, 1, texmgr.getTexture("grass"),
+			{ staticAnim },
+			TileType::GRASS, 50, 0, 1);
+	tileAtlas["forest"] =
+		Tile(tileSize, 1, texmgr.getTexture("forest"),
+			{ staticAnim },
+			TileType::FOREST, 100, 0, 1);
+	tileAtlas["water"] =
+		Tile(tileSize, 1, texmgr.getTexture("water"),
+			{ Animation(0, 3, 0.5f),
+			Animation(0, 3, 0.5f),
+			Animation(0, 3, 0.5f) },
+			TileType::WATER, 0, 0, 1);
+	tileAtlas["residential"] =
+		Tile(tileSize, 2, texmgr.getTexture("residential"),
+			{ staticAnim, staticAnim, staticAnim,
+			staticAnim, staticAnim, staticAnim },
+			TileType::RESIDENTIAL, 300, 50, 6);
+	tileAtlas["commercial"] =
+		Tile(tileSize, 2, texmgr.getTexture("commercial"),
+			{ staticAnim, staticAnim, staticAnim, staticAnim },
+			TileType::COMMERCIAL, 300, 50, 4);
+	tileAtlas["industrial"] =
+		Tile(tileSize, 2, texmgr.getTexture("industrial"),
+			{ staticAnim, staticAnim, staticAnim,
+			staticAnim },
+			TileType::INDUSTRIAL, 300, 50, 4);
+	tileAtlas["road"] =
+		Tile(tileSize, 1, texmgr.getTexture("road"),
+			{ staticAnim, staticAnim, staticAnim,
+			staticAnim, staticAnim, staticAnim,
+			staticAnim, staticAnim, staticAnim,
+			staticAnim, staticAnim },
+			TileType::ROAD, 100, 0, 1);
 }
 
 
