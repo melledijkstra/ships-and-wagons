@@ -1,21 +1,31 @@
 #include <stack>
 
-#include <SFML\Graphics.hpp>
-#include <SFML\System.hpp>
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 
 #include "Game.h"
 #include "GameState.h"
 
 Game::Game()
 {
+	this->loadTextures();
+
 	this->window.create(sf::VideoMode(800, 600), "ShipsAndWagons");
 	this->window.setFramerateLimit(60);
+
+	this->background.setTexture(this->texmgr.getTexture("background"));
 }
 
 Game::~Game()
 {
 	while (!this->states.empty()) popState();
 }
+
+void Game::loadTextures()
+{
+	texmgr.loadTexture("background", "Resources/Images/background.png");
+}
+
 
 //// <summary>
 /// The actual game loop
@@ -28,10 +38,10 @@ void Game::gameLoop()
 {
 	sf::Clock clock;
 
-	while (this->window.isOpen()) 
+	while (this->window.isOpen())
 	{
-		sf::Time elapsed = clock.restart();
-		float dt = elapsed.asSeconds();
+		auto elapsed = clock.restart();
+		auto dt = elapsed.asSeconds();
 
 		if (peekState() == nullptr) continue;
 		// handle input
@@ -49,7 +59,6 @@ void Game::gameLoop()
 void Game::pushState(GameState* state)
 {
 	this->states.push(state);
-	return;
 }
 
 void Game::popState()

@@ -3,13 +3,20 @@
 #include "GameState.h"
 #include "GameStartState.h"
 
+GameStartState::GameStartState(Game* game)
+{
+	this->game = game;
+	sf::Vector2f pos = sf::Vector2f(this->game->window.getSize());
+	this->view.setSize(pos);
+	pos *= 0.5f;
+	this->view.setCenter(pos);
+}
+
 void GameStartState::draw(const float dt)
 {
 	this->game->window.setView(this->view);
 	this->game->window.clear(sf::Color::Black);
 	this->game->window.draw(this->game->background);
-
-	return;
 }
 
 void GameStartState::update(const float dt)
@@ -29,8 +36,8 @@ void GameStartState::handleInput() {
 			game->window.close();
 			break;
 		case sf::Event::Resized:
-			this->view.setSize(event.size.width, event.size.height);
-			this->game->background.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(0, 0)));
+			this->view.setSize(float(event.size.width), float(event.size.height));
+			this->game->background.setPosition(0, 0);//this->game->window.mapPixelToCoords(sf::Vector2i(0, 0)));
 			this->game->background.setScale(
 				float(event.size.width) / float(this->game->background.getTexture()->getSize().x),
 				float(event.size.height) / float(this->game->background.getTexture()->getSize().y)
@@ -43,13 +50,4 @@ void GameStartState::handleInput() {
 			break;
 		}
 	}
-}
-
-GameStartState::GameStartState(Game* game) 
-{
-	this->game = game;
-	sf::Vector2f pos = sf::Vector2f(this->game->window.getSize());
-	this->view.setSize(pos);
-	pos *= 0.5f;
-	this->view.setCenter(pos);
 }
