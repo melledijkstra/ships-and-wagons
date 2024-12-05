@@ -4,9 +4,9 @@
 
 ## Game Concept
 
-| Title       | Continental Traders                                                                 |
-|-------------|--------------------------------------------------------------------------------------|
-| Genre       | Strategy / Simulation                                                                |
+| Title       |    Ships and Wagons   |
+|-------------|-----------------------|
+| Genre       | Strategy / Simulation |
 | Objective   | To build a successful trading empire by effectively managing resources, transport routes, and trade goods. Players aim to outmaneuver competitors and dominate the market. |
 
 ## Gameplay Mechanics
